@@ -1,0 +1,27 @@
+# ===== 공통 =====
+.DS_Store
+Thumbs.db
+*.log
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# ===== 프론트엔드 (page) =====
+page/node_modules
+page/dist
+page/dist-ssr
+*.local
+
+# ===== 백엔드 (backend) =====
+backend/build
+backend/.gradle
+*.class
+*.jar
+!backend/gradle/wrapper/gradle-wrapper.jar
+
+# 기타
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
