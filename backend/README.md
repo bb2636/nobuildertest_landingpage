@@ -33,7 +33,7 @@ CREATE TABLE contacts (
 
 - `spring.datasource.url=jdbc:mysql://localhost:3306/page?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul`
 - `spring.datasource.username=root`
-- `spring.datasource.password=1234` ← **본인 MySQL root 비밀번호로 수정**
+- `spring.datasource.password=0000` ← **본인 MySQL root 비밀번호로 수정**
 - `server.port=8081`
 - `spring.jpa.hibernate.ddl-auto=update`
 
