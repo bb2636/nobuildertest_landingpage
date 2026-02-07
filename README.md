@@ -123,3 +123,17 @@ Android Studio가 열리면:
 
 - 이 **step1** 폴더 전체를 그대로 ZIP으로 압축하거나, Git 저장소로 푸시하면 됩니다.
 - `node_modules`, `backend/build`, `backend/.gradle` 등은 `.gitignore`에 의해 제외됩니다.
+
+
+<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/f28732d0-9281-409b-98b6-858689bb3154" />
+<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/fb334221-89f3-44c6-b330-0149f56c8443" />
+<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/5fcef895-959d-4de2-a468-9a70da6c1b2d" />
+<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/9f2ab934-4d6b-4ef2-a2e0-dd449d012e7d" />
+<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/14b9a025-74ae-4ff1-a098-de2a76d69ff1" />
+<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/3e937012-edcc-4be6-b459-91eef451c0d0" />
+
+
+
+
+
+
