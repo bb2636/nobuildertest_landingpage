@@ -1,0 +1,8 @@
+{
+  "appId": "com.example.page",
+  "appName": "노코드 개발자 홍길동",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}

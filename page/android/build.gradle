@@ -1,0 +1,46 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+import org.gradle.api.tasks.compile.JavaCompile
+
+buildscript {
+    
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.13.0'
+        classpath 'com.google.gms:google-services:4.4.4'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+apply from: "variables.gradle"
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+subprojects { subproject ->
+    subproject.afterEvaluate {
+        // Android 라이브러리(capacitor-android 등) Java 17 통일 (21 미지원 환경 대응)
+        if (subproject.extensions.findByName('android')) {
+            subproject.android.compileOptions.sourceCompatibility = JavaVersion.VERSION_17
+            subproject.android.compileOptions.targetCompatibility = JavaVersion.VERSION_17
+        }
+        if (subproject.plugins.hasPlugin('java') || subproject.plugins.hasPlugin('java-library')) {
+            subproject.tasks.withType(JavaCompile).configureEach {
+                sourceCompatibility = JavaVersion.VERSION_17
+                targetCompatibility = JavaVersion.VERSION_17
+            }
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

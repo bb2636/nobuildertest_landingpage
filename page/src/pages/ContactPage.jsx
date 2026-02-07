@@ -1,9 +1,31 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Mail, MapPin, ArrowLeft } from 'lucide-react'
-import { submitContact } from '../api/contactApi'
+import { submitContact, API_BASE } from '../api/contactApi'
 
 const initialForm = { name: '', email: '', phone: '', message: '' }
+
+function getContactErrorMessage(err) {
+  if (err?.response?.data?.message) return err.response.data.message
+  if (err?.response?.status) {
+    if (err.response.status === 404) {
+      return `서버 주소를 찾을 수 없습니다. (${err.response.status})\n연결 주소: ${API_BASE}\n· 같은 Wi‑Fi인지, 백엔드가 실행 중인지 확인해 주세요.`
+    }
+    if (err.response.status >= 500) {
+      return `서버 오류가 발생했습니다. (${err.response.status})\n나중에 다시 시도해 주세요.`
+    }
+    return `전송 실패 (${err.response.status}). 다시 시도해 주세요.`
+  }
+  const isNetwork = !err?.response && (err?.code === 'ERR_NETWORK' || err?.message?.includes('Network'))
+  const isTimeout = err?.code === 'ECONNABORTED' || err?.message?.includes('timeout')
+  if (isTimeout) {
+    return `연결 시간이 초과되었습니다.\n연결 주소: ${API_BASE}\n· 노트북에서 백엔드가 실행 중인지, 방화벽에서 8081 포트가 허용인지 확인해 주세요.`
+  }
+  if (isNetwork || !err?.response) {
+    return `서버에 연결할 수 없습니다.\n연결 주소: ${API_BASE}\n· 휴대폰과 노트북이 같은 Wi‑Fi인지\n· 노트북에서 백엔드 실행 중인지\n· 방화벽에서 8081 포트 인바운드 허용인지\n확인해 주세요.`
+  }
+  return '전송에 실패했습니다. 다시 시도해 주세요.'
+}
 
 export default function ContactPage() {
   const [form, setForm] = useState(initialForm)
@@ -34,7 +56,8 @@ export default function ContactPage() {
       console.error('Contact 전송 에러:', err)
       console.error('에러 상세:', err?.response?.data)
       console.error('상태 코드:', err?.response?.status)
-      alert(err?.response?.data?.message || '전송에 실패했습니다. 다시 시도해 주세요.')
+      const msg = getContactErrorMessage(err)
+      alert(msg)
     } finally {
       setSubmitting(false)
     }
@@ -59,6 +82,7 @@ export default function ContactPage() {
         <div className="w-full max-w-md">
           <h1 className="text-2xl sm:text-3xl font-bold mb-2">Get in touch</h1>
           <p className="text-slate-400 text-sm mb-8">문의 내용을 입력해 주세요.</p>
+          <p className="text-slate-500 text-xs mb-4 break-all">연결 주소: {API_BASE}</p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
